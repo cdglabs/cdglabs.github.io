@@ -16,6 +16,13 @@
             -webkit-perspective: 300;
             perspective: 300;
         }
+        #logo {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 64px;
+            height: 64px;
+        }
         #obj {
             text-shadow: 3px 2px 3px rgba(120, 120, 120, 1);
             font-size: 20px;
@@ -25,8 +32,9 @@
             transform: translateY(-50%);
         }
         #projects {
-            position: relative;
-            top: 77%; 
+            width: 100%;
+            position: absolute;
+            bottom: 16px; 
         }
     </style>
     <script>
@@ -39,6 +47,7 @@
     </script>
 </head>
 <body>
+    <a href="https://github.com/cdglabs"><img id="logo" src="CDG-interim-logo.svg"></a>
     <div id="obj">
         It is a web page
         <br>
