@@ -11,17 +11,22 @@
         body {
             margin: 0;
             height: 100%;
+            font-family: 'Fira Sans', sans-serif;
+            text-align: center;
             -webkit-perspective: 300;
             perspective: 300;
         }
         #obj {
             text-shadow: 3px 2px 3px rgba(120, 120, 120, 1);
-            font-family: 'Fira Sans', sans-serif;
             font-size: 20px;
             position: relative;
             top: 50%; 
             -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
+        }
+        #projects {
+            position: relative;
+            top: 77%; 
         }
     </style>
     <script>
@@ -34,13 +39,15 @@
     </script>
 </head>
 <body>
-    <div id="obj" align="center">
+    <div id="obj">
         It is a web page
         <br>
         Yet it is not a web page
         <br>
         Under construction
         <br>
-	In the meantime, let some of our <a href="https://github.com/cdglabs">projects</a> dazzle you up!
+    </div>
+    <div id="projects">
+        In the meantime, let some of our <a href="https://github.com/cdglabs">projects</a> dazzle you up!
     </div>
 </body>
