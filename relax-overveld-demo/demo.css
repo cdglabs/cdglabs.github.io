@@ -1,0 +1,135 @@
+body {
+  font-family: "PT Sans", Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+demos, actions {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2000;
+  overflow: auto;
+
+  -webkit-transition: all .5s ease-out;
+  transition: all .5s ease-out;
+}
+
+demos {
+  right: 5px;
+}
+
+actions {
+  left: 5px;
+}
+
+demo, action, showEachIterationButton {
+  display: block;
+  margin: 8pt;
+  padding: 5pt;
+  color: #848484;
+  background: #eee;
+  border-radius: 1.5pt;
+  border: 1px solid #ddd;
+  box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, .2);
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+demos.collapsed {
+  right: -80pt;
+  pointer-events: none;
+}
+
+actions.collapsed {
+  left: -116pt;
+  pointer-events: none;
+}
+
+flap {
+  visibility: hidden;
+  position: absolute;
+  cursor: default;
+  font-weight: bold;
+  color: #848484;
+  padding: 7pt 5pt 5pt 5pt;
+  background: #eee;
+  border-radius: 1.5pt;
+  border: 1px solid #ddd;
+  -webkit-user-select: none;
+  -webkit-transition: visibility .5s step-start;
+  transition: visibility .5s step-start;
+}
+
+demos flap {
+  letter-spacing: 2.5pt;
+  box-shadow: 1px -1px 1px 0px rgba(0, 0, 0, .2);
+  top: 24pt;
+  left: -16pt;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+}
+
+actions flap {
+  letter-spacing: 2pt;
+  box-shadow: -1px 1px 1px 0px rgba(0, 0, 0, .2);
+  top: 26pt;
+  right: -19pt;
+  transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+}
+
+actions.collapsed flap, demos.collapsed flap {
+  visibility: visible;
+  pointer-events: initial;
+
+  -webkit-transition: visibility .5s step-end;
+  transition: visibility .5s step-end;
+}
+
+demo:hover, action:hover {
+  border: 1px solid #bbbbbb;
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, .2);
+}
+
+action {
+  background: #F0F0F0;
+  margin-right: 27pt;
+}
+
+demo {
+  text-align: center;
+  margin-left: 27pt;
+}
+
+showEachIterationButton {
+  padding: 4pt;
+  background: #eef;
+  position: absolute;
+  bottom: 20px;
+  left: 45%;
+  color: blue;
+  display: none;
+}
+
+showEachIterationButton:hover {
+  background: #dde;
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, .4);
+}
+
+iterationsPerFrame {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #848484;
+}
+
+iterationsPerFrame:after {
+  content: ' iterations / frame';
+}
+

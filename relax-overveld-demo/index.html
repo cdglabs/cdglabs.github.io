@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+    <meta name="viewport" content="user-scalable=no"></meta>
+    <title>DON'T PANIC</title>
+    <link href="demo.css" rel="stylesheet"></link>
+  </head>
+  <body>
+    <script src="3rdparty/pep.js"></script>
+    <script src="../dist/relax.js"></script>
+    <script src="RelaxCanvas.js"></script>
+    <script src="Turtle.js"></script>
+    <canvas id="canvas" touch-action="none" tabindex="0"></canvas>
+    <demos id="demos">
+      <flap>DEMOS</flap>
+      <demo style="text-align: center">⇨</demo>
+    </demos>
+    <actions id="actions">
+      <flap>ACTIONS</flap>
+      <action key='P'>P: point</action>
+      <action key='D'>D: delete</action>
+      <action key='F'>F: coordinate/1</action>
+      <action key='C'>C: coincidence/2</action>
+      <action key='Q'>Q: equivalence/4</action>
+      <action key='E'>E: eqdist/4</action>
+      <action key='L'>L: length/2</action>
+      <action key='O'>O: orientation/4</action>
+      <action key='R'>R: parallel/4</action>
+      <action key='N'>N: perpendicular/4</action>
+      <action key='M'>M: motor/2</action>
+      <action style="text-align: center">⇦</action>
+    </actions>
+    <iterationsPerFrame id="ipf"></iterationsPerFrame>
+    <showEachIterationButton id="sii"></showEachIterationButton>
+    <script>
+
+var demos = document.getElementById('demos');
+
+var examples = {};
+
+function showDemo(name) {
+  rc.clear();
+  examples[name]();
+}
+
+var actions = document.getElementsByTagName('action');
+for (var idx = 0; idx < actions.length - 1; idx++) {
+  var action = actions[idx];
+  action.setAttribute('touch-action', 'none');
+  action.addEventListener(
+      'pointerdown',
+      function(e) {
+        rc.keydown(this.getAttribute('key'));
+      },
+      false
+  );
+  action.addEventListener(
+      'pointerup',
+      function(e) {
+        rc.keyup(this.getAttribute('key'));
+      },
+      false
+  );
+  action.addEventListener(
+      'pointerout',
+      function(e) {
+        rc.keyup(this.getAttribute('key'));
+      },
+      false
+  );
+}
+
+onload = function() {
+  showDemo('clear');
+};
+
+var demoFlap = document.querySelector('demos flap');
+demoFlap.addEventListener('click', function(e) {
+  if (demos.classList.contains('collapsed')) {
+    demos.classList.remove('collapsed');
+    e.preventDefault();
+    e.stopPropagation();
+    return true;
+  }
+}, false);
+document.querySelector('demo:last-of-type').addEventListener('click', function(e) {
+  if (!demos.classList.contains('collapsed')) {
+    demos.classList.add('collapsed');
+  }
+});
+
+var actionFlap = document.querySelector('actions flap');
+actionFlap.addEventListener('click', function(e) {
+  var actions = actionFlap.parentElement;
+  if (actions.classList.contains('collapsed')) {
+    actions.classList.remove('collapsed');
+    e.preventDefault();
+    e.stopPropagation();
+    return true;
+  }
+}, false);
+document.querySelector('action:last-of-type').addEventListener('click', function(e) {
+  var actions = actionFlap.parentElement;
+  if (!actions.classList.contains('collapsed')) {
+    actions.classList.add('collapsed');
+  }
+});
+    </script>
+
+    <script src="example-clear.js"></script>
+    <script src="example-rod.js"></script>
+    <script src="example-chain.js"></script>
+    <script src="example-lazy-tongs.js"></script>
+    <script src="example-perspective.js"></script>
+    <script src="example-pythagoras.js"></script>
+
+    <script>
+
+Object.keys(examples).forEach(function(e) {
+  var demo = document.createElement('demo');
+  demo.appendChild(document.createTextNode(e));
+  demo.onclick = function() {
+    showDemo(e);
+  };
+  demos.insertBefore(demo, demos.querySelector('demo:last-of-type'));
+});
+
+var canvas = document.getElementById('canvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+var rc = new RelaxCanvas(new Relax(), canvas);
+
+var ipf = document.getElementById('ipf');
+setInterval(
+    function() {
+      ipf.innerHTML = rc.iterationsPerFrame;
+    },
+    100
+);
+
+var sii = document.getElementById('sii');
+function updateSIILabel() {
+  sii.innerHTML = (rc.showEachIteration ? '' : 'not ') + ' rendering after each iteration';
+}
+sii.onclick = function() {
+  rc.showEachIteration = !rc.showEachIteration;
+  updateSIILabel();
+};
+updateSIILabel();
+
+    </script>
+  </body>
+</html>
+
